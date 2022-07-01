@@ -1,0 +1,26 @@
+.tasks__elem {
+    margin: 20px;
+    box-shadow: 10px 10px 5px #f7c5c5;
+    background: #b2e7ff;
+    border: 1px solid #000;
+    border-radius: 30px;
+    width: 230px;
+    height: 230px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.tasks__elem__icons{
+    display: flex;
+    justify-content: space-between;
+    .tasks__icon{
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+.tasks__elem__text{
+    font-weight: 500;
+}

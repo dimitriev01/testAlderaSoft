@@ -1,0 +1,8 @@
+.myInput{
+    border: #b2e7ff 2px solid;
+    padding: 10px 15px;
+    font-size: 15px;
+}
+.myInput:not(:last-of-type){
+    margin-bottom: 15px;
+}
