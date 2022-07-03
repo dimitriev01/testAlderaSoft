@@ -1,100 +1,59 @@
-import React, { useEffect, useRef, useState } from 'react';
-import MyBtn from './components/UI/button/MyBtn';
-import MyInput from './components/UI/input/MyInput'
+import React, { useMemo, useState } from 'react';
 import QuoteOfDay from './components/UI/quote/QuoteOfDay';
 import Tasks from './components/UI/tasks/Tasks';
-import Task from './components/UI/task/Task';
+import TaskForm from './components/UI/TaskForm/TaskForm';
 import './styles/App.scss';
+import TaskFilter from './components/UI/TaskFilter/TaskFilter';
 
 function App() {
-  const [error, setError] = useState(false);
+  let [today, setToday] = useState(new Date())
+  let [tomorrow, setTomorrow] = useState(new Date().setDate(today.getDate() + 1))
   const [tasks, setTasks] = useState([
-    { id: 1, nameTask: 'Продукты', descriptionTask: 'Масло, молоко, хлеб', tagTask: 'Купить' },
-    { id: 2, nameTask: 'д/з', descriptionTask: 'Сделать д/з', tagTask: 'Работа' },
-    { id: 3, nameTask: 'Перестановка', descriptionTask: 'Помочь бабушке сделать перестановку', tagTask: 'Семья' }
+    { id: 1, nameTask: 'Продукты', descriptionTask: 'Масло, молоко, хлеб', tagTask: 'Купить', date: Date.now(), period: tomorrow, status: false },
+    { id: 2, nameTask: 'д/з', descriptionTask: 'Сделать д/з', tagTask: 'Работа', date: Date.now(), period: tomorrow, status: false },
+    { id: 3, nameTask: 'Перестановка', descriptionTask: 'Помочь бабушке сделать перестановку', tagTask: 'Семья', date: Date.now(), period: tomorrow, status: false }
   ])
-  const [nameTask, setNameTask] = useState('')
-  const [descriptionTask, setDescriptionTask] = useState('')
-  const [tagTask, setTagTask] = useState('')
+  const [filter, setFilter] = useState({ sort: '', query: '' })
 
-  const nameTaskRef = useRef();
-  const descriptionTaskRef = useRef();
-  const tagTaskRef = useRef();
-
-  function addTask(e) {
-    e.preventDefault();
-    const newTask = {
-      id: Date.now(),
-      nameTask,
-      descriptionTask,
-      tagTask
-    }
-    setTasks([...tasks, newTask])
-
-    setNameTask('')
-    setTagTask('')
-    setDescriptionTask('')
+  function createTask(task) {
+    setTasks([...tasks, task])
   }
 
-  function checkError(error) {
-    setError(error)
+  function removeTask(task) {
+    setTasks(tasks.filter(p => p.id !== task.id))
   }
+
+  const sortedTasks = useMemo(() => {
+    if (filter.sort)
+      return [...tasks].sort((a, b) => String(a[filter.sort]).localeCompare(String(b[filter.sort])))
+    else
+      return tasks
+  }, [filter.sort, tasks])
+
+  const sortedAndSearchedTasks = useMemo(() => {
+    return sortedTasks.filter(
+      task => task.tagTask.toLowerCase().includes(filter.query.toLowerCase())
+    )
+  }, [filter.query, sortedTasks])
 
   return (
     <div className="App">
-      <div className='container'>
-        {
-          error ?
-            'Невозможно получить цитату дня. Сервер не отвечает'
-            :
-            <QuoteOfDay create={checkError} />
-        }
+      <div className='container'> 
+        <QuoteOfDay/> 
 
-        <div className='tasks'>
-        <form className='tasks__form'>
-            <MyInput
-              ref={nameTaskRef}
-              value={nameTask}
-              onChange={e => setNameTask(e.target.value)}
-              type="text"
-              name="nameTask"
-              placeholder='Введите название'
-            />
-            <MyInput
-              ref={descriptionTaskRef}
-              value={descriptionTask}
-              onChange={e => setDescriptionTask(e.target.value)}
-              type="text"
-              name="description"
-              placeholder='Введите описание'
-            />
-            <MyInput
-              ref={tagTaskRef}
-              value={tagTask}
-              onChange={e => setTagTask(e.target.value)}
-              type="text"
-              name="tag"
-              placeholder='Введите тэг'
-            />
-          </form>
-          <MyBtn type='submit' onClick={addTask}>Добавить задачу</MyBtn>
-          <div className='tasks__title'>
-            Ваши задачи:
-          </div>
-          {
-            tasks.length ?
-              <ul className='tasks__elems'>
-                  {
-                    tasks.map((task,i) =>
-                      <Task num={i+1} key={task.id} task={task}/>
-                  )}
-              </ul>
-              :
-              <div className='tasks__check-empty'>Нет задач!<i class="fa-solid fa-face-sunglasses"></i></div>
-          }
+        <TaskForm
+          createTask={createTask}
+        />
 
-        </div>
+        <TaskFilter
+          filter={filter}
+          setFilter={setFilter}
+        />
 
+        <Tasks 
+          remove={removeTask} 
+          tasks={sortedAndSearchedTasks} 
+        />
       </div>
     </div>
   );
