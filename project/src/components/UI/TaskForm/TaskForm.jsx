@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MyBtn from '../button/MyBtn';
 import MyInput from '../input/MyInput';
 import cl from './TaskForm.module.scss'
@@ -9,8 +9,8 @@ const TaskForm = ({ createTask }) => {
     function addTask(e) {
         e.preventDefault();
         const newTask = {
-            date: Date.now(),
             id: Date.now(),
+            date: Date.now(),
             ...task
         }
         if (task.nameTask && task.descriptionTask && task.tagTask && task.period)
@@ -21,29 +21,16 @@ const TaskForm = ({ createTask }) => {
         setTask({ nameTask: '', descriptionTask: '', tagTask: '', period: '' })
     }
 
-    function formSubmitHandler (e) {
-        // try {
-        //     localStorage.setItem('nameTask', task.nameTask);
-        //     localStorage.setItem('descriptionTask', task.descriptionTask);
-        //     localStorage.setItem('tagTask', task.tagTask);
-        //     localStorage.setItem('period', task.period);
-        // } catch (error) {
-        //     console.log(error)
-        // }
-        console.log('f');
-    }
-    
-
-    const nameTaskRef = useRef();
-    const descriptionTaskRef = useRef();
-    const tagTaskRef = useRef();
-    const periodRef = useRef();
+    // const nameTaskRef = useRef();
+    // const descriptionTaskRef = useRef();
+    // const tagTaskRef = useRef();
+    // const periodRef = useRef();
 
     return (
-        <form className={cl.form} onSubmit={formSubmitHandler}>
+        <form className={cl.form}>
             <MyInput
                 autoComplete='off'
-                ref={nameTaskRef}
+                // ref={nameTaskRef}
                 value={task.nameTask}
                 onChange={e => setTask({ ...task, nameTask: e.target.value })}
                 type="text"
@@ -52,7 +39,7 @@ const TaskForm = ({ createTask }) => {
             />
             <MyInput
                 autoComplete='off'
-                ref={descriptionTaskRef}
+                // ref={descriptionTaskRef}
                 value={task.descriptionTask}
                 onChange={e => setTask({ ...task, descriptionTask: e.target.value })}
                 type="text"
@@ -61,7 +48,7 @@ const TaskForm = ({ createTask }) => {
             />
             <MyInput
                 autoComplete='off'
-                ref={tagTaskRef}
+                // ref={tagTaskRef}
                 value={task.tagTask}
                 onChange={e => setTask({ ...task, tagTask: e.target.value })}
                 type="text"
@@ -69,7 +56,7 @@ const TaskForm = ({ createTask }) => {
                 placeholder='Введите тэг'
             />
             <MyInput
-                ref={periodRef}
+                // ref={periodRef}
                 value={task.period}
                 onChange={e => setTask({ ...task, period: e.target.value })}
                 type='date'

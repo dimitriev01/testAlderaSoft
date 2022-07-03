@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import QuoteOfDay from './components/UI/quote/QuoteOfDay';
 import Tasks from './components/UI/tasks/Tasks';
 import TaskForm from './components/UI/TaskForm/TaskForm';
@@ -7,11 +7,12 @@ import TaskFilter from './components/UI/TaskFilter/TaskFilter';
 
 function App() {
   let [today, setToday] = useState(new Date())
-  let [tomorrow, setTomorrow] = useState(new Date().setDate(today.getDate() + 1))
+  let [tomorrow, setTomorrow] = useState(today.setDate(today.getDate() + 1))
+
   const [tasks, setTasks] = useState([
     { id: 1, nameTask: 'Продукты', descriptionTask: 'Масло, молоко, хлеб', tagTask: 'Купить', date: Date.now(), period: tomorrow, status: false },
     { id: 2, nameTask: 'д/з', descriptionTask: 'Сделать д/з', tagTask: 'Работа', date: Date.now(), period: tomorrow, status: false },
-    { id: 3, nameTask: 'Перестановка', descriptionTask: 'Помочь бабушке сделать перестановку', tagTask: 'Семья', date: Date.now(), period: tomorrow, status: false }
+    { id: 3, nameTask: 'Перестановка', descriptionTask: 'Помочь бабушке сделать перестановку', tagTask: 'Семья', date: Date.now(), period: tomorrow, status: false}
   ])
   const [filter, setFilter] = useState({ sort: '', query: '' })
 
@@ -36,6 +37,14 @@ function App() {
     )
   }, [filter.query, sortedTasks])
 
+  function f(){
+    
+  }
+
+  useEffect(()=>{
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  },[tasks])
+
   return (
     <div className="App">
       <div className='container'> 
@@ -51,6 +60,7 @@ function App() {
         />
 
         <Tasks 
+          f={f}
           remove={removeTask} 
           tasks={sortedAndSearchedTasks} 
         />

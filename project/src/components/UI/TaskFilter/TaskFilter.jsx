@@ -15,7 +15,7 @@ const TaskFilter = ({ filter, setFilter }) => {
                     defaultValue='Сортировка'
                     options={[
                         { value: 'nameTask', name: "По названию" },
-                        { value: 'period', name: "По дате" },
+                        { value: 'period', name: "По сроку" },
                     ]}
                 />
             </div>

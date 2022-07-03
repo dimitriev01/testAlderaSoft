@@ -2,7 +2,7 @@ import React from 'react';
 import Task from '../task/Task';
 import cl from './Tasks.module.scss'
 
-const Tasks = ({ tasks, remove }) => {
+const Tasks = ({ tasks, remove, f }) => {
     if (!tasks.length){
         return(
             <div className={cl['check-empty']}>
@@ -11,17 +11,18 @@ const Tasks = ({ tasks, remove }) => {
         )
     }
 
+
     return (
         <>
             <div className={cl.title}>
                 Ваши задачи:
             </div>
-            <div className={cl.tasks}>
+            <ul className={cl.tasks}>
                 {
                     tasks.map((task, i) =>
-                        <Task remove={remove} num={i + 1} key={task.id} task={task} />
+                        <Task f={f} remove={remove} num={i + 1} key={task.id} task={task} />
                     )}
-            </div>
+            </ul>
         </>
     );
 };
