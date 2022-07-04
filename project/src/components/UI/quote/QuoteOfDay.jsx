@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import cl from './QuoteOfDay.module.scss'
 
 const QuoteOfDay = () => {
@@ -19,6 +19,10 @@ const QuoteOfDay = () => {
 
     fetchData();
   }, [])
+
+  useMemo(()=>{
+    localStorage.setItem('quote', JSON.stringify(quote))
+  },[quote])
 
   if (error){
     return (

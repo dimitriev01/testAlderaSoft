@@ -4,7 +4,7 @@ import MyInput from '../input/MyInput';
 import cl from './TaskForm.module.scss'
 
 const TaskForm = ({ createTask }) => {
-    const [task, setTask] = useState({ nameTask: '', descriptionTask: '', tagTask: '', period: '', status: false })
+    const [task, setTask] = useState({ nameTask: '', descriptionTask: '', tagTask: '', period: '' })
 
     function addTask(e) {
         e.preventDefault();
@@ -21,17 +21,12 @@ const TaskForm = ({ createTask }) => {
         setTask({ nameTask: '', descriptionTask: '', tagTask: '', period: '' })
     }
 
-    // const nameTaskRef = useRef();
-    // const descriptionTaskRef = useRef();
-    // const tagTaskRef = useRef();
-    // const periodRef = useRef();
-
     return (
         <form className={cl.form}>
             <MyInput
+                autoFocus
                 autoComplete='off'
-                // ref={nameTaskRef}
-                value={task.nameTask}
+                value={task.nameTask.trim()}
                 onChange={e => setTask({ ...task, nameTask: e.target.value })}
                 type="text"
                 name="nameTask"
@@ -39,8 +34,7 @@ const TaskForm = ({ createTask }) => {
             />
             <MyInput
                 autoComplete='off'
-                // ref={descriptionTaskRef}
-                value={task.descriptionTask}
+                value={task.descriptionTask.trim()}
                 onChange={e => setTask({ ...task, descriptionTask: e.target.value })}
                 type="text"
                 name="descriptionTask"
@@ -48,15 +42,13 @@ const TaskForm = ({ createTask }) => {
             />
             <MyInput
                 autoComplete='off'
-                // ref={tagTaskRef}
-                value={task.tagTask}
+                value={task.tagTask.trim()}
                 onChange={e => setTask({ ...task, tagTask: e.target.value })}
                 type="text"
                 name="tagTask"
                 placeholder='Введите тэг'
             />
             <MyInput
-                // ref={periodRef}
                 value={task.period}
                 onChange={e => setTask({ ...task, period: e.target.value })}
                 type='date'

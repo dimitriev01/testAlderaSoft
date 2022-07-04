@@ -1,9 +1,10 @@
 import React from 'react';
 import cl from './MySelect.module.scss'
 
-const MySelect = ({ options, defaultValue, value, onChange }) => {
+const MySelect = ({ disabled, options, defaultValue, value, onChange }) => {
     return (
         <select
+            disabled={disabled}
             className={cl.select}
             value={value}
             onChange={(event) => onChange(event.target.value)}

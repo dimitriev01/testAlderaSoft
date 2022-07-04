@@ -1,0 +1,45 @@
+.modal-task{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    background:#000;
+    opacity: .9;
+    &-active{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.modal-content{
+    padding: 25px;
+    background: #fff;
+    border-radius: 16px;
+    max-width: 900px ;
+}
+
+.status{
+    display: flex;
+    align-items: center;
+}
+
+.status__circle{
+    margin-left: 20px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    &-soon{
+        background: red;
+    }
+    
+    &-late{
+        background: green;
+    }
+}
+
+.info{
+    margin-top: 20px;
+}

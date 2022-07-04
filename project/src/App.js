@@ -4,17 +4,48 @@ import Tasks from './components/UI/tasks/Tasks';
 import TaskForm from './components/UI/TaskForm/TaskForm';
 import './styles/App.scss';
 import TaskFilter from './components/UI/TaskFilter/TaskFilter';
+import ModalTask from './components/UI/ModalTask/ModalTask';
+import Task from './components/UI/task/Task';
 
 function App() {
   let [today, setToday] = useState(new Date())
-  let [tomorrow, setTomorrow] = useState(today.setDate(today.getDate() + 1))
+  let [tomorrow, setTomorrow] = useState(new Date(new Date().setDate(today.getDate() + 1)))
 
   const [tasks, setTasks] = useState([
-    { id: 1, nameTask: 'Продукты', descriptionTask: 'Масло, молоко, хлеб', tagTask: 'Купить', date: Date.now(), period: tomorrow, status: false },
-    { id: 2, nameTask: 'д/з', descriptionTask: 'Сделать д/з', tagTask: 'Работа', date: Date.now(), period: tomorrow, status: false },
-    { id: 3, nameTask: 'Перестановка', descriptionTask: 'Помочь бабушке сделать перестановку', tagTask: 'Семья', date: Date.now(), period: tomorrow, status: false}
+    {
+      id: 1,
+      nameTask: 'Продукты',
+      descriptionTask: 'Масло, молоко, хлеб',
+      tagTask: 'Купить',
+      date: today,
+      period: tomorrow,
+      status: 'Новая',
+      edit: false
+    },
+    {
+      id: 2,
+      nameTask: 'д/з',
+      descriptionTask: 'Сделать д/з',
+      tagTask: 'Работа',
+      date: today,
+      period: tomorrow,
+      status: 'Новая',
+      edit: false
+    },
+    {
+      id: 3,
+      nameTask: 'Перестановка',
+      descriptionTask: 'Помочь бабушке сделать перестановку',
+      tagTask: 'Семья',
+      date: today,
+      period: tomorrow,
+      status: 'Новая',
+      edit: false
+    }
   ])
   const [filter, setFilter] = useState({ sort: '', query: '' })
+  const [status, setStatus] = useState('')
+  const [modal, setModal] = useState(false);
 
   function createTask(task) {
     setTasks([...tasks, task])
@@ -37,18 +68,18 @@ function App() {
     )
   }, [filter.query, sortedTasks])
 
-  function f(){
-    
+  function getTasks(tasks) {
+    setTasks(tasks)
   }
 
-  useEffect(()=>{
+  useMemo(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
-  },[tasks])
+  }, [tasks])
 
   return (
     <div className="App">
-      <div className='container'> 
-        <QuoteOfDay/> 
+      <div className='container'>
+        <QuoteOfDay />
 
         <TaskForm
           createTask={createTask}
@@ -59,11 +90,21 @@ function App() {
           setFilter={setFilter}
         />
 
-        <Tasks 
-          f={f}
-          remove={removeTask} 
-          tasks={sortedAndSearchedTasks} 
+        <Tasks
+          setModal={setModal}
+          status={status}
+          setStatus={setStatus}
+          setTasks={getTasks}
+          remove={removeTask}
+          tasks={sortedAndSearchedTasks}
         />
+
+        <ModalTask
+          visible={modal}
+          setVisible={setModal}
+          tasks={tasks}
+        />
+
       </div>
     </div>
   );

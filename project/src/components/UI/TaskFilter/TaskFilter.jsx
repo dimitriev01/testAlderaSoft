@@ -25,7 +25,7 @@ const TaskFilter = ({ filter, setFilter }) => {
                     value={filter.query}
                     onChange={e => setFilter({...filter, query: e.target.value})}
                     placeholder='Поиск'
-                    style={{ margin: '20px 0', display: 'block', width: '100%' }}
+                    className='search__item'
                 />
             </div>
         </>
