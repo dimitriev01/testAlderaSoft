@@ -45,14 +45,8 @@ function App() {
   ])
   const [filter, setFilter] = useState({ sort: '', query: '' })
   const [modal, setModal] = useState(false);
-
-  function createTask(task) {
-    setTasks([...tasks, task])
-  }
-
-  function removeTask(task) {
-    setTasks(tasks.filter(p => p.id !== task.id))
-  }
+  const [taskModal, setTaskModal] = useState('')
+  const [taskModalNum, setTaskModalNum] = useState('')
 
   const sortedTasks = useMemo(() => {
     if (filter.sort)
@@ -67,16 +61,24 @@ function App() {
     )
   }, [filter.query, sortedTasks])
 
-  function getTasks(tasks) {
-    setTasks(tasks)
+  function createTask(task) {
+    setTasks([...tasks, task])
+  }
+
+  function removeTask(task) {
+    setTasks(tasks.filter(p => p.id !== task.id))
   }
 
   function getTask(task) {
-    return task;
+    setTaskModal(task)
   }
 
   function getNum(num) {
-    return num;
+    setTaskModalNum(num)
+  }
+
+  function getTasks(tasks) {
+    setTasks(tasks)
   }
 
   useMemo(() => {
@@ -107,8 +109,9 @@ function App() {
         />
 
         <ModalTask
-          num={getNum}
-          task={getTask}
+          setTasks={tasks}
+          num={taskModalNum}
+          taskModal={taskModal}
           visible={modal}
           setVisible={setModal}
         />

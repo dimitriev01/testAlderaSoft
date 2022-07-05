@@ -24,7 +24,7 @@ const TaskFilter = ({ filter, setFilter }) => {
                 <MyInput
                     value={filter.query}
                     onChange={e => setFilter({...filter, query: e.target.value})}
-                    placeholder='Поиск'
+                    placeholder='Поиск по тэгу'
                     className='search__item'
                 />
             </div>

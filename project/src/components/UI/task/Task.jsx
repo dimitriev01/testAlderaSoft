@@ -1,14 +1,14 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MyBtn from '../button/MyBtn';
 import MyInput from '../input/MyInput';
 import MySelect from '../select/MySelect';
 import cl from './Task.module.scss'
 import ModalTask from '../ModalTask/ModalTask';
 
-const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
+const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
 
     const [edit, setEdit] = useState(false)
-    const [tasksEdit, setTasksEdit] = useState({ ...task })
+    const [taskEdit, setTaskEdit] = useState({ ...task })
 
     function formatDate(date) {
         let dd = date.getDate();
@@ -40,9 +40,10 @@ const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
     }
 
     useMemo(()=>{
-        localStorage.setItem('tasks', JSON.stringify(tasksEdit))
-        setTasksEdit(tasksEdit)
-    },[tasksEdit])
+        // setTasks(tasksEdit)
+        setTaskEdit(taskEdit, { ...task})
+        // localStorage.setItem('tasks', JSON.stringify({...taskEdit}))
+    },[taskEdit])
 
     return (
         <li className={cl.task}>
@@ -53,8 +54,9 @@ const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
                         ref={nameTaskRef}
                         className='task__text__item'
                         disabled
-                        value={tasksEdit.nameTask}
-                        onChange={e => setTasksEdit({ ...tasksEdit, nameTask: e.target.value })}
+                        value={taskEdit.nameTask}
+                        //onChange={e => setTasks({ ...tasksEdit, nameTask: e.target.value })}
+                        onChange={e => setTaskEdit({ ...taskEdit, nameTask: e.target.value })}
                     />
                 </div>
                 <div>Описание задачи:
@@ -62,8 +64,8 @@ const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
                         ref={descriptionTaskRef}
                         className='task__text__item'
                         disabled
-                        value={tasksEdit.descriptionTask}
-                        onChange={e => setTasksEdit({ ...tasksEdit, descriptionTask: e.target.value })}
+                        value={taskEdit.descriptionTask}
+                        onChange={e => setTaskEdit({ ...taskEdit, descriptionTask: e.target.value })}
                     />
                 </div>
                 <div>Тег задачи:
@@ -71,8 +73,8 @@ const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
                         ref={tagTaskRef}
                         className='task__text__item'
                         disabled
-                        value={tasksEdit.tagTask}
-                        onChange={e => setTasksEdit({ ...tasksEdit, tagTask: e.target.value })}
+                        value={taskEdit.tagTask}
+                        onChange={e => setTaskEdit({ ...taskEdit, tagTask: e.target.value })}
                     />
                 </div>
                 <div>
@@ -85,18 +87,22 @@ const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
                         ref={periodRef}
                         className='task__text__item'
                         disabled
-                        value={formatDate(new Date(tasksEdit.period))}
-                        onChange={e => setTasksEdit({ ...tasksEdit, period: e.target.value })}
+                        value={formatDate(new Date(taskEdit.period))}
+                        onChange={e => setTaskEdit({ ...taskEdit, period: e.target.value })}
                     />
                 </div>
             </div>
 
-            <span onClick={() => remove(task)} className={cl.task__delete}>X</span>
+            <span 
+            onClick={() => remove(task)} 
+            className={cl.task__delete}>
+                X
+            </span>
 
             <div className={cl.task__tools}>
                 <MySelect
                     value={task.status}
-                    onChange={selectedStatus => setTasksEdit({...tasksEdit, status: selectedStatus})}
+                    onChange={selectedStatus => setTaskEdit({...taskEdit, status: selectedStatus})}
                     disabled
                     defaultValue='Новая'
                     options={[

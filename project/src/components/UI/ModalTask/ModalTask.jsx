@@ -3,12 +3,12 @@ import MySelect from '../select/MySelect';
 import Task from '../task/Task';
 import cl from './ModalTask.module.scss'
 
-const ModalTask = ({visible, setVisible, task, num}) => {
+const ModalTask = ({visible, setVisible, taskModal, num, setTasks}) => {
 
-    const [tasksEdit, setTasksEdit] = useState({ ...task })
+    const [tasksEdit, setTasksEdit] = useState( taskModal )
 
     function checkColorCircle(){
-        return ((Date.parse(task.period) - Date.parse(task.date)) < 259200000);
+        return ((Date.parse(tasksEdit.period) - Date.parse(taskModal.date)) < 259200000);
     }
     
     const rootClasses = [cl['modal-task']]
@@ -17,7 +17,7 @@ const ModalTask = ({visible, setVisible, task, num}) => {
     }
 
     useMemo(() => {
-        //localStorage.setItem('tasks', JSON.stringify(tasksEdit))
+        // localStorage.setItem('tasks', JSON.stringify(tasksEdit))
     }, [tasksEdit])
 
     return (
@@ -28,7 +28,7 @@ const ModalTask = ({visible, setVisible, task, num}) => {
                 </span>
                 <MySelect
                     className='status'
-                    value={task.status}
+                    value={tasksEdit.status}
                     onChange={selectedStatus => setTasksEdit({...tasksEdit, status: selectedStatus})}
                     defaultValue='Новая'
                     options={[
