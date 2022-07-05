@@ -18,7 +18,7 @@ const ModalTask = ({visible, setVisible, task, num}) => {
 
     useMemo(() => {
         //localStorage.setItem('tasks', JSON.stringify(tasksEdit))
-    }, [tasksEdit.status])
+    }, [tasksEdit])
 
     return (
         <div className={ rootClasses.join(' ')} onClick={()=>{setVisible(false)}}>
