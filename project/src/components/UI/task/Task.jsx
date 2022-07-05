@@ -5,11 +5,10 @@ import MySelect from '../select/MySelect';
 import cl from './Task.module.scss'
 import ModalTask from '../ModalTask/ModalTask';
 
-
-const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks }) => {
+const Task = ({ task, num, remove, setTasks,  setModal, tasks }) => {
 
     const [edit, setEdit] = useState(false)
-    const [taskEdit, setTaskEdit] = useState(task)
+    const [tasksEdit, setTasksEdit] = useState({ ...task })
 
     function formatDate(date) {
         let dd = date.getDate();
@@ -40,9 +39,10 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
         })
     }
 
-    // useMemo(()=>{
-    //     setTasks({...taskEdit})
-    // },[taskEdit])
+    useMemo(()=>{
+        localStorage.setItem('tasks', JSON.stringify(tasksEdit))
+        setTasksEdit(tasksEdit)
+    },[tasksEdit])
 
     return (
         <li className={cl.task}>
@@ -53,8 +53,8 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
                         ref={nameTaskRef}
                         className='task__text__item'
                         disabled
-                        value={taskEdit.nameTask}
-                        onChange={e => setTasks({ ...taskEdit, nameTask: e.target.value })}
+                        value={tasksEdit.nameTask}
+                        onChange={e => setTasksEdit({ ...tasksEdit, nameTask: e.target.value })}
                     />
                 </div>
                 <div>Описание задачи:
@@ -62,8 +62,8 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
                         ref={descriptionTaskRef}
                         className='task__text__item'
                         disabled
-                        value={taskEdit.descriptionTask}
-                        onChange={e => setTasks({ ...taskEdit, descriptionTask: e.target.value })}
+                        value={tasksEdit.descriptionTask}
+                        onChange={e => setTasksEdit({ ...tasksEdit, descriptionTask: e.target.value })}
                     />
                 </div>
                 <div>Тег задачи:
@@ -71,8 +71,8 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
                         ref={tagTaskRef}
                         className='task__text__item'
                         disabled
-                        value={taskEdit.tagTask}
-                        onChange={e => setTasks({ ...taskEdit, tagTask: e.target.value })}
+                        value={tasksEdit.tagTask}
+                        onChange={e => setTasksEdit({ ...tasksEdit, tagTask: e.target.value })}
                     />
                 </div>
                 <div>
@@ -85,8 +85,8 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
                         ref={periodRef}
                         className='task__text__item'
                         disabled
-                        value={formatDate(new Date(taskEdit.period))}
-                        onChange={e => setTasks({ ...taskEdit, period: e.target.value })}
+                        value={formatDate(new Date(tasksEdit.period))}
+                        onChange={e => setTasksEdit({ ...tasksEdit, period: e.target.value })}
                     />
                 </div>
             </div>
@@ -95,9 +95,9 @@ const Task = ({ task, num, remove, setTasks, status, setStatus, setModal, tasks 
 
             <div className={cl.task__tools}>
                 <MySelect
+                    value={task.status}
+                    onChange={selectedStatus => setTasksEdit({...tasksEdit, status: selectedStatus})}
                     disabled
-                    value={status}
-                    onChange={selectedStatuse => setStatus(selectedStatuse)}
                     defaultValue='Новая'
                     options={[
                         { value: 'inWork', name: "В работе" },

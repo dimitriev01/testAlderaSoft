@@ -4,13 +4,13 @@ import MyInput from '../input/MyInput';
 import cl from './TaskForm.module.scss'
 
 const TaskForm = ({ createTask }) => {
-    const [task, setTask] = useState({ nameTask: '', descriptionTask: '', tagTask: '', period: '' })
+    const [task, setTask] = useState({ nameTask: '', descriptionTask: '', tagTask: '', period: '', status: 'Новая', edit: false })
 
     function addTask(e) {
         e.preventDefault();
         const newTask = {
             id: Date.now(),
-            date: Date.now(),
+            date: new Date(),
             ...task
         }
         if (task.nameTask && task.descriptionTask && task.tagTask && task.period)

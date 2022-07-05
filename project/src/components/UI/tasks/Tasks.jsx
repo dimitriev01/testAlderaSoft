@@ -2,7 +2,7 @@ import React from 'react';
 import Task from '../task/Task';
 import cl from './Tasks.module.scss'
 
-const Tasks = ({ tasks, remove, status, setStatus, setModal, setTasks }) => {
+const Tasks = ({task, tasks, remove,  setModal, setTasks }) => {
     if (!tasks.length) {
         return (
             <div className={cl['check-empty']}>

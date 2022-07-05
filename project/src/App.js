@@ -44,7 +44,6 @@ function App() {
     }
   ])
   const [filter, setFilter] = useState({ sort: '', query: '' })
-  const [status, setStatus] = useState('')
   const [modal, setModal] = useState(false);
 
   function createTask(task) {
@@ -72,6 +71,14 @@ function App() {
     setTasks(tasks)
   }
 
+  function getTask(task) {
+    return task;
+  }
+
+  function getNum(num) {
+    return num;
+  }
+
   useMemo(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
@@ -91,18 +98,19 @@ function App() {
         />
 
         <Tasks
+          num={getNum}
+          task={getTask}
           setModal={setModal}
-          status={status}
-          setStatus={setStatus}
           setTasks={getTasks}
           remove={removeTask}
           tasks={sortedAndSearchedTasks}
         />
 
         <ModalTask
+          num={getNum}
+          task={getTask}
           visible={modal}
           setVisible={setModal}
-          tasks={tasks}
         />
 
       </div>
