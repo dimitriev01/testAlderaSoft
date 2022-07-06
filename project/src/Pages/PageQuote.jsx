@@ -3,7 +3,7 @@ import QuoteOfDay from '../components/UI/quote/QuoteOfDay';
 
 const PageQuote = () => {
     return (
-        <QuoteOfDay/>
+        <QuoteOfDay />
     );
 };
 

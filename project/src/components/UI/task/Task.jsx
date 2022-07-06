@@ -40,7 +40,7 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
     }
 
     useMemo(()=>{
-        // setTasks(tasksEdit)
+        // setTasks({taskEdit})
         setTaskEdit(taskEdit, { ...task})
         // localStorage.setItem('tasks', JSON.stringify({...taskEdit}))
     },[taskEdit])
@@ -55,7 +55,7 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
                         className='task__text__item'
                         disabled
                         value={taskEdit.nameTask}
-                        //onChange={e => setTasks({ ...tasksEdit, nameTask: e.target.value })}
+                        // onChange={e => setTasks({ ...taskEdit, nameTask: e.target.value })}
                         onChange={e => setTaskEdit({ ...taskEdit, nameTask: e.target.value })}
                     />
                 </div>

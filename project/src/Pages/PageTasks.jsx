@@ -13,7 +13,7 @@ const PageTasks = () => {
     {
       id: 1,
       nameTask: 'Продукты',
-      descriptionTask: 'Масло, молоко, хлеб',
+      descriptionTask: 'Масло',
       tagTask: 'Купить',
       date: today,
       period: tomorrow,
@@ -66,6 +66,14 @@ const PageTasks = () => {
     setTasks(tasks.filter(p => p.id !== task.id))
   }
 
+  useMemo(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+  function changeTasks(task){
+    setTasks(...tasks, task)
+  }
+
   // function getTask(task) {
   //   setTaskModal(task)
   // }
@@ -74,39 +82,34 @@ const PageTasks = () => {
   //   setTaskModalNum(num)
   // }
 
-  useMemo(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
+  return (
+    <>
+      <TaskForm
+        createTask={createTask}
+      />
 
+      <TaskFilter
+        filter={filter}
+        setFilter={setFilter}
+      />
 
-    return (
-        <>
-            <TaskForm
-                createTask={createTask}
-            />
+      <Tasks
+        // num={getNum}
+        // task={getTask}
+        setModal={setModal}
+        setTasks={changeTasks}
+        remove={removeTask}
+        tasks={sortedAndSearchedTasks}
+      />
 
-            <TaskFilter
-            filter={filter}
-            setFilter={setFilter}
-            />
-
-            <Tasks
-            // num={getNum}
-            // task={getTask}
-            setModal={setModal}
-            setTasks={setTasks}
-            remove={removeTask}
-            tasks={sortedAndSearchedTasks}
-            />
-
-            <ModalTask
-            taskModal={taskModal}
-            visible={modal}
-            setVisible={setModal}
-            setTasks={setTasks}
-            />
-        </>
-    );
+      <ModalTask
+        taskModal={taskModal}
+        visible={modal}
+        setVisible={setModal}
+        setTasks={setTasks}
+      />
+    </>
+  );
 };
 
 export default PageTasks;
