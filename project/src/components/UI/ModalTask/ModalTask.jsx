@@ -3,7 +3,7 @@ import MySelect from '../select/MySelect';
 import Task from '../task/Task';
 import cl from './ModalTask.module.scss'
 
-const ModalTask = ({visible, setVisible, taskModal, num, setTasks}) => {
+const ModalTask = ({visible, setVisible, taskModal,  setTasks}) => {
 
     const [tasksEdit, setTasksEdit] = useState( taskModal )
 

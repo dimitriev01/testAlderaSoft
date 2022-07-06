@@ -2,7 +2,7 @@ import React from 'react';
 import Task from '../task/Task';
 import cl from './Tasks.module.scss'
 
-const Tasks = ({task, tasks, remove, setModal, setTasks }) => {
+const Tasks = ({ tasks, remove, setModal, setTasks }) => {
 
     if (!tasks.length) {
         return (
@@ -19,7 +19,7 @@ const Tasks = ({task, tasks, remove, setModal, setTasks }) => {
             </div>
             <ul className={cl.tasks}>
                 {
-                    tasks.map((task, i) =>
+                    tasks && tasks.map((task, i) =>
                         <Task
                             tasks={tasks}
                             setModal={setModal}
