@@ -72,7 +72,7 @@ const PageTasks = () => {
   }, [tasks])
 
   function changeTasks(task){
-    setTasks(...tasks, task)
+    setTasks([task]) //код работает 
   }
 
   // function getTask(task) {

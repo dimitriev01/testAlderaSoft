@@ -8,7 +8,7 @@ import ModalTask from '../ModalTask/ModalTask';
 const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
 
     const [edit, setEdit] = useState(false)
-    const [taskEdit, setTaskEdit] = useState({ ...task })
+    const [taskEdit, setTaskEdit] = useState(task)
 
     function formatDate(date) {
         let dd = date.getDate();
@@ -39,9 +39,9 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
         })
     }
 
-    useMemo(()=>{
-        // setTasks({taskEdit})
-        setTaskEdit(taskEdit, { ...task})
+    useEffect(()=>{
+        setTasks(taskEdit)
+        // setTaskEdit(taskEdit, { ...task})
         // localStorage.setItem('tasks', JSON.stringify({...taskEdit}))
     },[taskEdit])
 
@@ -101,7 +101,7 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
 
             <div className={cl.task__tools}>
                 <MySelect
-                    value={task.status}
+                    value={taskEdit.status}
                     onChange={selectedStatus => setTaskEdit({...taskEdit, status: selectedStatus})}
                     disabled
                     defaultValue='Новая'
