@@ -1,12 +1,13 @@
 .line{
+    margin: 25px 0;
     border-top: 1px solid #000;
 }
 
 .sort{
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .search{
-    display: flex;
-    align-items: center;
+    margin-bottom: 20px ;
 }

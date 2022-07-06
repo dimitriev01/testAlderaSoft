@@ -8,8 +8,9 @@ const TaskFilter = ({ filter, setFilter }) => {
         <>
             <hr className={cl.line}/>
             <div className={cl.sort}>
-                Сортировка задач: &#160; &#160; &#160;
+                Сортировка задач:
                 <MySelect
+                    className='sort'
                     value={filter.sort}
                     onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
                     defaultValue='Сортировка'
@@ -19,8 +20,9 @@ const TaskFilter = ({ filter, setFilter }) => {
                     ]}
                 />
             </div>
+            <br></br>
             <div className={cl.search}>
-                <br /> Поиск задач: &#160; &#160; &#160;
+               Поиск задач:  
                 <MyInput
                     value={filter.query}
                     onChange={e => setFilter({...filter, query: e.target.value})}
