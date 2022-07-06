@@ -22,8 +22,9 @@ const TaskForm = ({ createTask }) => {
     }
 
     return (
-        <form className={cl.form}>
+        <form className={cl.form} action="/example/handler.php">
             <MyInput
+                required
                 autoFocus
                 autoComplete='off'
                 value={task.nameTask.trim()}
@@ -33,6 +34,7 @@ const TaskForm = ({ createTask }) => {
                 placeholder='Введите название'
             />
             <MyInput
+                required
                 autoComplete='off'
                 value={task.descriptionTask.trim()}
                 onChange={e => setTask({ ...task, descriptionTask: e.target.value })}
@@ -41,6 +43,7 @@ const TaskForm = ({ createTask }) => {
                 placeholder='Введите описание'
             />
             <MyInput
+                required
                 autoComplete='off'
                 value={task.tagTask.trim()}
                 onChange={e => setTask({ ...task, tagTask: e.target.value })}
@@ -49,6 +52,7 @@ const TaskForm = ({ createTask }) => {
                 placeholder='Введите тэг'
             />
             <MyInput
+                required
                 value={task.period}
                 onChange={e => setTask({ ...task, period: e.target.value })}
                 type='date'

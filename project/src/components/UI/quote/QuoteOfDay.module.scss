@@ -22,8 +22,9 @@
     &__icon{
         font-size: 30px;
     }
+    &-error{
+        color: red;
+        text-align: center;
+    }
 }
 
-.error{
-    color: red;
-}

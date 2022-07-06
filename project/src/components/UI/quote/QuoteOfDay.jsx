@@ -26,7 +26,7 @@ const QuoteOfDay = () => {
 
   if (error){
     return (
-      <div className={cl.error}>Невозможно получить цитату дня. Сервер не отвечает</div>
+      <div className={cl['quote-error']}>Невозможно получить цитату дня. Сервер не отвечает</div>
     )
   }
 
