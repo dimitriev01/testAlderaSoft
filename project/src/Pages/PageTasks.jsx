@@ -54,7 +54,8 @@ const PageTasks = () => {
 
   const sortedAndSearchedTasks = useMemo(() => {
     return sortedTasks.filter(
-      task => task.tagTask.toLowerCase().includes(filter.query.toLowerCase())
+      task =>
+        task.tagTask.toLowerCase().includes(filter.query.toLowerCase()) || task.status.toLowerCase().includes(filter.query.toLowerCase())
     )
   }, [filter.query, sortedTasks])
 
