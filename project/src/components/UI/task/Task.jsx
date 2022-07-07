@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect,  useRef, useState } from 'react';
 import MyBtn from '../button/MyBtn';
 import MyInput from '../input/MyInput';
 import MySelect from '../select/MySelect';
 import cl from './Task.module.scss'
-import ModalTask from '../ModalTask/ModalTask';
 
 const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
 
@@ -37,12 +36,11 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
         inputsRefs.map((input) => {
             input.current.disabled = edit;
         })
+        return;
     }
 
     useEffect(()=>{
         setTasks(taskEdit)
-        // setTaskEdit(taskEdit, { ...task})
-        // localStorage.setItem('tasks', JSON.stringify({...taskEdit}))
     },[taskEdit])
 
     return (
@@ -55,7 +53,6 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
                         className='task__text__item'
                         disabled
                         value={taskEdit.nameTask}
-                        // onChange={e => setTasks({ ...taskEdit, nameTask: e.target.value })}
                         onChange={e => setTaskEdit({ ...taskEdit, nameTask: e.target.value })}
                     />
                 </div>

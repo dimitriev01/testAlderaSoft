@@ -18,7 +18,7 @@ const QuoteOfDay = () => {
     }
 
     fetchData();
-  }, [])
+  }, [api])
 
   useMemo(()=>{
     localStorage.setItem('quote', JSON.stringify(quote))

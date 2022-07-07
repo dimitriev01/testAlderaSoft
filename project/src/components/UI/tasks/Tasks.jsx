@@ -4,6 +4,7 @@ import cl from './Tasks.module.scss'
 
 const Tasks = ({ tasks, remove, setModal, setTasks }) => {
 
+    
     if (!tasks.length) {
         return (
             <div className={cl['check-empty']}>
@@ -19,7 +20,7 @@ const Tasks = ({ tasks, remove, setModal, setTasks }) => {
             </div>
             <ul className={cl.tasks}>
                 {
-                    tasks && tasks.map((task, i) =>
+                   tasks.map((task, i) =>
                         <Task
                             tasks={tasks}
                             setModal={setModal}

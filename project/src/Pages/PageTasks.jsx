@@ -43,7 +43,6 @@ const PageTasks = () => {
   ])
   const [filter, setFilter] = useState({ sort: '', query: '' })
   const [modal, setModal] = useState(false);
-  const [taskModal, setTaskModal] = useState('')
 
   const sortedTasks = useMemo(() => {
     if (filter.sort)
@@ -67,21 +66,18 @@ const PageTasks = () => {
     setTasks(tasks.filter(p => p.id !== task.id))
   }
 
+  function changeTask(task){
+    const index = tasks.findIndex(tsk => {
+      return tsk.id === task.id
+    })
+    setTasks(Object.assign(tasks, { [index]: task }))
+  }
+
   useMemo(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
-  function changeTasks(task){
-    setTasks([task]) //код работает 
-  }
-
-  // function getTask(task) {
-  //   setTaskModal(task)
-  // }
-
-  // function getNum(num) {
-  //   setTaskModalNum(num)
-  // }
+  const [taskModal, setTaskModal] = useState('')
 
   return (
     <>
@@ -95,19 +91,18 @@ const PageTasks = () => {
       />
 
       <Tasks
-        // num={getNum}
-        // task={getTask}
         setModal={setModal}
-        setTasks={changeTasks}
+        setTasks={changeTask}
         remove={removeTask}
         tasks={sortedAndSearchedTasks}
       />
 
       <ModalTask
-        taskModal={taskModal}
         visible={modal}
         setVisible={setModal}
-        setTasks={setTasks}
+
+        taskModal={taskModal}
+        setTasks={changeTask}
       />
     </>
   );
