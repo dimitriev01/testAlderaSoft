@@ -9,22 +9,6 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
     const [edit, setEdit] = useState(false)
     const [taskEdit, setTaskEdit] = useState(task)
 
-    function formatDate(date) {
-        let dd = date.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        let mm = date.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        let yy = date.getFullYear() % 100;
-        if (yy < 10)
-            yy = '200' + yy;
-        else
-            yy = '20' + yy;
-
-        return yy + '-' + mm + '-' + dd;
-    }
-
     const nameTaskRef = useRef();
     const descriptionTaskRef = useRef();
     const tagTaskRef = useRef();
@@ -76,7 +60,7 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                     />
                 </div>
                 <div>
-                    Время добавления: {formatDate(new Date(task.date)).split('-').reverse().join('.')}
+                    Время добавления: {new Date(taskEdit.date).toLocaleDateString()}
                 </div>
                 <div>
                     Срок выполнения:
@@ -85,7 +69,7 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                         ref={periodRef}
                         className='task__text__item'
                         disabled
-                        value={formatDate(new Date(taskEdit.period))}
+                        value={new Date(taskEdit.period).toLocaleDateString().split('.').reverse().join('-')}
                         onChange={e => setTaskEdit({ ...taskEdit, period: e.target.value })}
                     />
                 </div>

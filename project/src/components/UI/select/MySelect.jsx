@@ -4,9 +4,8 @@ import cl from './MySelect.module.scss'
 const MySelect = ({ className, disabled, options, defaultValue, value, onChange }) => {
     return (
         <select
-            disabled={disabled}
-            className={[cl.select, 
-                className === 'status' ? cl.status : 
+            className={[cl.select,
+                className === 'status' ? cl.status :
                 className === 'sort' ? cl.sort : ''
             ].join(' ')}
             value={value}

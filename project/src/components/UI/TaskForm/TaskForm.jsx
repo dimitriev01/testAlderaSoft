@@ -11,6 +11,7 @@ const TaskForm = ({ createTask }) => {
         const newTask = {
             id: Date.now(),
             date: new Date(),
+            period: new Date(task.period),
             ...task
         }
         if (task.nameTask && task.descriptionTask && task.tagTask && task.period)
@@ -53,7 +54,7 @@ const TaskForm = ({ createTask }) => {
             />
             <MyInput
                 required
-                value={task.period}
+                value={task.period.trim()}
                 onChange={e => setTask({ ...task, period: e.target.value })}
                 type='date'
                 name="period"

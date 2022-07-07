@@ -24,7 +24,7 @@ const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
                 <MySelect
                     className='status'
                     value={taskModal.status}
-                    onChange={selectedStatus => setTasks({taskModal, status: selectedStatus})}
+                    onChange={selectedStatus => setTaskModal({...taskModal, status: selectedStatus})}
                     defaultValue='Новая'
                     options={[
                         { value: 'inWork', name: "В работе" },
