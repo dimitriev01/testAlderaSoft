@@ -70,14 +70,12 @@ const PageTasks = () => {
     const index = tasks.findIndex(tsk => {
       return tsk.id === task.id
     })
-    setTasks(Object.assign(tasks, { [index]: task }))
+    setTasks(Object.assign([...tasks], { [index]: task }))
   }
 
   useMemo(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
-
-  const [taskModal, setTaskModal] = useState('')
 
   return (
     <>
@@ -101,8 +99,8 @@ const PageTasks = () => {
         visible={modal}
         setVisible={setModal}
 
-        taskModal={taskModal}
-        setTasks={changeTask}
+        tasks={tasks}
+        setTasks={setTasks}
       />
     </>
   );

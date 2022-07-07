@@ -4,7 +4,7 @@ import MyInput from '../input/MyInput';
 import MySelect from '../select/MySelect';
 import cl from './Task.module.scss'
 
-const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
+const Task = ({ task, num, remove, setTasks, setModal}) => {
 
     const [edit, setEdit] = useState(false)
     const [taskEdit, setTaskEdit] = useState(task)
@@ -36,12 +36,13 @@ const Task = ({ task, num, remove, setTasks, setModal, tasks }) => {
         inputsRefs.map((input) => {
             input.current.disabled = edit;
         })
+        setTaskEdit({ ...taskEdit, edit: !edit })
         return;
     }
 
     useEffect(()=>{
         setTasks(taskEdit)
-    },[taskEdit])
+    },[taskEdit,edit])
 
     return (
         <li className={cl.task}>

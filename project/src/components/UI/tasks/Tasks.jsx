@@ -22,7 +22,6 @@ const Tasks = ({ tasks, remove, setModal, setTasks }) => {
                 {
                    tasks.map((task, i) =>
                         <Task
-                            tasks={tasks}
                             setModal={setModal}
                             setTasks={setTasks}
                             remove={remove}
