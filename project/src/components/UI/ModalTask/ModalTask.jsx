@@ -1,10 +1,11 @@
-import React, {  useState, useMemo } from 'react';
+import React, {  useState, useMemo, useEffect } from 'react';
 import MySelect from '../select/MySelect';
 import cl from './ModalTask.module.scss'
 
 const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
 
-    const [taskModal, setTaskModal] = useState(tasks)
+    const [taskModal, setTaskModal] = useState(tasks.map(task=> task))
+    const [status, setStatus] = useState('')
 
     function checkColorCircle(){
         return ((Date.parse(taskModal.period) - Date.parse(taskModal.date)) < 259200000);
@@ -15,6 +16,8 @@ const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
        rootClasses.push(cl['modal-task-active'])
     }
 
+
+
     return (
         <div className={ rootClasses.join(' ')} onClick={()=>{setVisible(false)}}>
             <div className={cl['modal-content']} onClick={e=>{e.stopPropagation()}}>
@@ -23,8 +26,8 @@ const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
                 </span>
                 <MySelect
                     className='status'
-                    value={taskModal.status}
-                    onChange={selectedStatus => setTaskModal({...taskModal, status: selectedStatus})}
+                    value={status}
+                    onChange={selectedStatus => setStatus(selectedStatus)}
                     defaultValue='Новая'
                     options={[
                         { value: 'inWork', name: "В работе" },

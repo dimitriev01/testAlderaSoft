@@ -1,6 +1,6 @@
 .select{
     display: inline-block;
-    width: 160px;
+    min-width: 160px;
     height: 34px;
     line-height: 30px;
     position: relative;
@@ -13,4 +13,8 @@
 
 .sort{
     margin-left: 20px;
+}
+
+.task__text__item{
+    margin-top: 10px;
 }

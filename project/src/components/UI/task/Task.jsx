@@ -4,7 +4,7 @@ import MyInput from '../input/MyInput';
 import MySelect from '../select/MySelect';
 import cl from './Task.module.scss'
 
-const Task = ({ task, num, remove, setTasks, setModal}) => {
+const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, setModal}) => {
 
     const [edit, setEdit] = useState(false)
     const [taskEdit, setTaskEdit] = useState(task)
@@ -18,15 +18,16 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
     function giveEdit() {
         setEdit(!edit)
         inputsRefs.map((input) => {
-            input.current.disabled = edit;
+            return input.current.disabled = edit;
         })
         setTaskEdit({ ...taskEdit, edit: !edit })
-        return;
     }
 
     useEffect(()=>{
         setTasks(taskEdit)
     },[taskEdit,edit])
+
+    const [tagAndStatus, setTagAndStatus] = useState({tagTask:'', status:''})
 
     return (
         <li className={cl.task}>
@@ -34,6 +35,7 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                 Номер задачи: {num}
                 <div>Название задачи:
                     <MyInput
+                        placeholder='Введите название'
                         ref={nameTaskRef}
                         className='task__text__item'
                         disabled
@@ -43,6 +45,7 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                 </div>
                 <div>Описание задачи:
                     <MyInput
+                        placeholder='Введите описание'
                         ref={descriptionTaskRef}
                         className='task__text__item'
                         disabled
@@ -52,12 +55,31 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                 </div>
                 <div>Тег задачи:
                     <MyInput
+                        placeholder='Введите тег'
                         ref={tagTaskRef}
                         className='task__text__item'
                         disabled
                         value={taskEdit.tagTask}
                         onChange={e => setTaskEdit({ ...taskEdit, tagTask: e.target.value })}
                     />
+                    {/* <div>
+                        <MySelect
+                            disabled
+                            ref={tagTaskRef}
+                            className='task__text__item'
+                            name='tag'
+                            value={tagAndStatus.tagTask}
+                            onChange={selectedTag => setTagAndStatus({...tagAndStatus, tagTask: selectedTag})}
+                            defaultValue='Тег'
+                            options={[
+                                { value: 'family', name: "Семья" },
+                                { value: 'work', name: "Работа" },
+                                { value: 'personal', name: "Личное" },
+                                { value: 'other', name: "Другое" },
+                            ]}
+                        />
+                    </div> */}
+                    
                 </div>
                 <div>
                     Время добавления: {new Date(taskEdit.date).toLocaleDateString()}
@@ -65,10 +87,10 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
                 <div>
                     Срок выполнения:
                     <MyInput
+                        disabled
                         type='date'
                         ref={periodRef}
                         className='task__text__item'
-                        disabled
                         value={new Date(taskEdit.period).toLocaleDateString().split('.').reverse().join('-')}
                         onChange={e => setTaskEdit({ ...taskEdit, period: e.target.value })}
                     />
@@ -83,9 +105,10 @@ const Task = ({ task, num, remove, setTasks, setModal}) => {
 
             <div className={cl.task__tools}>
                 <MySelect
-                    value={taskEdit.status}
-                    onChange={selectedStatus => setTaskEdit({...taskEdit, status: selectedStatus})}
                     disabled
+                    name='status'
+                    value={tagAndStatus.status}
+                    onChange={selectedStatus => setTagAndStatus({...tagAndStatus, status: selectedStatus})}
                     defaultValue='Новая'
                     options={[
                         { value: 'inWork', name: "В работе" },

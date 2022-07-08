@@ -11,7 +11,6 @@ const TaskForm = ({ createTask }) => {
         const newTask = {
             id: Date.now(),
             date: new Date(),
-            period: new Date(task.period),
             ...task
         }
         if (task.nameTask && task.descriptionTask && task.tagTask && task.period)

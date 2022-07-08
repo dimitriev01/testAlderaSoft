@@ -2,9 +2,8 @@ import React from 'react';
 import Task from '../task/Task';
 import cl from './Tasks.module.scss'
 
-const Tasks = ({ tasks, remove, setModal, setTasks }) => {
+const Tasks = ({/*setTagAndStatus, tagAndStatus,*/ tasks, remove, setModal, setTasks }) => {
 
-    
     if (!tasks.length) {
         return (
             <div className={cl['check-empty']}>
@@ -20,8 +19,10 @@ const Tasks = ({ tasks, remove, setModal, setTasks }) => {
             </div>
             <ul className={cl.tasks}>
                 {
-                   tasks.map((task, i) =>
+                   tasks && tasks.map((task, i) =>
                         <Task
+                            /*setTagAndStatus={setTagAndStatus}
+                            tagAndStatus={tagAndStatus}*/
                             setModal={setModal}
                             setTasks={setTasks}
                             remove={remove}

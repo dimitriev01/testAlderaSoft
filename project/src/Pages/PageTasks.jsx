@@ -77,6 +77,13 @@ const PageTasks = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
+  // function changeTagAndStatus(tagAndStatus){
+  //   const index = tasks.findIndex(tsk => {
+  //     return tsk.id === tagAndStatus.id
+  //   })
+  //   setTasks(Object.assign([...tasks], { [index]: tagAndStatus }))
+  // }
+
   return (
     <>
       <TaskForm
@@ -93,14 +100,18 @@ const PageTasks = () => {
         setTasks={changeTask}
         remove={removeTask}
         tasks={sortedAndSearchedTasks}
+        // setTagAndStatus={changeTagAndStatus}
+        // tagAndStatus={tagAndStatus}
       />
 
       <ModalTask
         visible={modal}
         setVisible={setModal}
+        // setTagAndStatus={changeTagAndStatus}
+        // tagAndStatus={tagAndStatus}
 
         tasks={tasks}
-        setTasks={setTasks}
+        setTasks={changeTask}
       />
     </>
   );

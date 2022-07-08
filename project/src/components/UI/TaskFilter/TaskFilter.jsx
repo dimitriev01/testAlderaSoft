@@ -10,6 +10,7 @@ const TaskFilter = ({ filter, setFilter }) => {
             <div className={cl.sort}>
                 Сортировка задач:
                 <MySelect
+                    name='sort'
                     className='sort'
                     value={filter.sort}
                     onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
