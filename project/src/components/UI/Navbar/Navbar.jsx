@@ -1,24 +1,24 @@
 import React from 'react';
-import './Navbar.scss'
+import cl from './Navbar.module.scss'
 import {NavLink} from "react-router-dom";
-import MyBtn from '../button/MyBtn';
+import Button from '../Button/Button';
 
 const Navbar = () => {
     return (
-        <nav className='nav'>
-            <div className='nav-links'>
-                <NavLink className='nav-link' to='/'>
-                    <MyBtn>
+        <nav className={cl.nav}>
+            <div className={cl['nav-links']}>
+                <NavLink className={cl['nav-link']} to='/'>
+                    <Button>
                         На главную
-                    </MyBtn>
+                    </Button>
                 </NavLink>
-                <NavLink className='nav-link' to='/tasks'>
-                    <MyBtn>
+                <NavLink className={cl['nav-link']} to='/tasks'>
+                    <Button>
                         Задачи
-                    </MyBtn>
+                    </Button>
                 </NavLink>
             </div>
-            <h1 className='nav-title'>
+            <h1 className={cl['nav-title']}>
                 Навигация
             </h1>
         </nav>

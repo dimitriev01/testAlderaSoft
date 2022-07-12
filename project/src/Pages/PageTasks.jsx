@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import ModalTask from '../components/UI/ModalTask/ModalTask';
 import TaskFilter from '../components/UI/TaskFilter/TaskFilter';
 import TaskForm from '../components/UI/TaskForm/TaskForm';
-import Tasks from '../components/UI/tasks/Tasks';
+import Tasks from '../components/UI/Tasks/Tasks';
 
 const PageTasks = () => {
 

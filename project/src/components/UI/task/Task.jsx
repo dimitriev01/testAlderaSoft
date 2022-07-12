@@ -1,7 +1,7 @@
 import React, { useEffect,  useRef, useState } from 'react';
-import MyBtn from '../button/MyBtn';
-import MyInput from '../input/MyInput';
-import MySelect from '../select/MySelect';
+import Button from '../Button/Button';
+import MyInput from '../Input/Input';
+import MySelect from '../Select/Select';
 import cl from './Task.module.scss'
 
 const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, setModal}) => {
@@ -119,11 +119,11 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
                     onClick={giveEdit}
                     className={['fa-solid', 'fa-pen-to-square', cl.task__tools__edit, edit ? cl['task__tools__edit-active'] : ''].join(' ')}>
                 </i>
-                <MyBtn
+                <Button
                     onClick={() => { setModal(true); }}
                 >
                     Открыть
-                </MyBtn>
+                </Button>
             </div>
 
         </li>

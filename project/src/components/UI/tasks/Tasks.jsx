@@ -1,5 +1,5 @@
 import React from 'react';
-import Task from '../task/Task';
+import Task from '../Task/Task';
 import cl from './Tasks.module.scss'
 
 const Tasks = ({/*setTagAndStatus, tagAndStatus,*/ tasks, remove, setModal, setTasks }) => {

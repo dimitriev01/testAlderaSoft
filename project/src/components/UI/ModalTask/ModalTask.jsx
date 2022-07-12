@@ -1,5 +1,5 @@
 import React, {  useState, useMemo, useEffect } from 'react';
-import MySelect from '../select/MySelect';
+import Select from '../Select/Select';
 import cl from './ModalTask.module.scss'
 
 const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
@@ -24,7 +24,7 @@ const ModalTask = ({visible, setVisible, setTasks, tasks}) => {
                 <span className={cl.status}>
                     Статус: <div className={[cl.status__circle, checkColorCircle ? cl['status__circle-soon'] : cl['status__circle-late'] ].join(' ')}></div>
                 </span>
-                <MySelect
+                <Select
                     className='status'
                     value={status}
                     onChange={selectedStatus => setStatus(selectedStatus)}

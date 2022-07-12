@@ -1,5 +1,5 @@
 import React from 'react'
-import cl from './MyBtn.module.scss'
+import cl from './Button.module.scss'
 
 const MyBtn = (props) => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import MyInput from '../input/MyInput';
-import MySelect from '../select/MySelect';
+import Input from '../Input/Input';
+import MySelect from '../Select/Select';
 import cl from './TaskFilter.module.scss'
 
 const TaskFilter = ({ filter, setFilter }) => {
@@ -24,7 +24,7 @@ const TaskFilter = ({ filter, setFilter }) => {
             <br></br>
             <div className={cl.search}>
                Поиск задач:  
-                <MyInput
+                <Input
                     value={filter.query}
                     onChange={e => setFilter({...filter, query: e.target.value})}
                     placeholder='Поиск по тэгу или статусу'

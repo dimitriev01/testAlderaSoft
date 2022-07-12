@@ -1,5 +1,5 @@
 import React from 'react';
-import QuoteOfDay from '../components/UI/quote/QuoteOfDay';
+import QuoteOfDay from '../components/UI/Quote/QuoteOfDay';
 
 const PageQuote = () => {
     return (

@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
-import MyBtn from '../button/MyBtn';
-import MyInput from '../input/MyInput';
+import Button from '../Button/Button';
+import MyInput from '../Input/Input';
 import cl from './TaskForm.module.scss'
 
 const TaskForm = ({ createTask }) => {
@@ -32,6 +32,7 @@ const TaskForm = ({ createTask }) => {
                 type="text"
                 name="nameTask"
                 placeholder='Введите название'
+                className='form-input'
             />
             <MyInput
                 required
@@ -41,6 +42,7 @@ const TaskForm = ({ createTask }) => {
                 type="text"
                 name="descriptionTask"
                 placeholder='Введите описание'
+                className='form-input'
             />
             <MyInput
                 required
@@ -50,6 +52,7 @@ const TaskForm = ({ createTask }) => {
                 type="text"
                 name="tagTask"
                 placeholder='Введите тэг'
+                className='form-input'
             />
             <MyInput
                 required
@@ -58,14 +61,14 @@ const TaskForm = ({ createTask }) => {
                 type='date'
                 name="period"
                 placeholder='Введите срок'
+                className='form-input'
             />
-            <MyBtn
+            <Button
                 type='submit'
-                style={{ marginTop: '20px' }}
                 onClick={addTask}
             >
                 Добавить задачу
-            </MyBtn>
+            </Button>
         </form>
     );
 };
