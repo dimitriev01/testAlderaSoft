@@ -1,72 +1,56 @@
 import React, {  useState } from 'react';
 import Button from '../Button/Button';
-import MyInput from '../Input/Input';
+import Input from '../Input/Input';
 import cl from './TaskForm.module.scss'
+import { useForm } from 'react-hook-form';
 
 const TaskForm = ({ createTask }) => {
-    const [task, setTask] = useState({ nameTask: '', descriptionTask: '', tagTask: '', period: '', status: 'Новая', edit: false })
 
-    function addTask(e) {
-        e.preventDefault();
+    const {
+        register,
+        handleSubmit,
+        reset
+      } = useForm();
+
+    const onSubmit = (data) => {
         const newTask = {
             id: Date.now(),
             date: new Date(),
-            ...task
+            edit: false,
+            status: 'Новая',
+            ...data
         }
-        if (task.nameTask && task.descriptionTask && task.tagTask && task.period)
-            createTask(newTask)
-        else
-            alert('Заполните все поля!')
-
-        setTask({ nameTask: '', descriptionTask: '', tagTask: '', period: '' })
+        createTask(newTask)
+        reset();
     }
 
     return (
-        <form className={cl.form} action="/example/handler.php">
-            <MyInput
-                required
-                autoFocus
+        <form className={cl.form} onSubmit={handleSubmit(onSubmit)}>
+            <Input
                 autoComplete='off'
-                value={task.nameTask.trim()}
-                onChange={e => setTask({ ...task, nameTask: e.target.value })}
-                type="text"
-                name="nameTask"
+                {...register("nameTask", { required : true })}
                 placeholder='Введите название'
                 className='form-input'
             />
-            <MyInput
-                required
+            <Input
                 autoComplete='off'
-                value={task.descriptionTask.trim()}
-                onChange={e => setTask({ ...task, descriptionTask: e.target.value })}
-                type="text"
-                name="descriptionTask"
+                {...register("descriptionTask", { required : true })}
                 placeholder='Введите описание'
                 className='form-input'
             />
-            <MyInput
-                required
+            <Input
                 autoComplete='off'
-                value={task.tagTask.trim()}
-                onChange={e => setTask({ ...task, tagTask: e.target.value })}
-                type="text"
-                name="tagTask"
+                {...register("tagTask", { required : true })}
                 placeholder='Введите тэг'
                 className='form-input'
             />
-            <MyInput
-                required
-                value={task.period.trim()}
-                onChange={e => setTask({ ...task, period: e.target.value })}
+            <Input
+                {...register("period", { required : true })}
                 type='date'
-                name="period"
                 placeholder='Введите срок'
                 className='form-input'
             />
-            <Button
-                type='submit'
-                onClick={addTask}
-            >
+            <Button>
                 Добавить задачу
             </Button>
         </form>

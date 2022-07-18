@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './Select.module.scss'
 
-const MySelect = ({name, className, disabled, options, defaultValue, value, onChange }) => {
+const Select = ({name, className, disabled, options, defaultValue, value, onChange }) => {
     return (
         <select
             disabled={disabled}
@@ -24,4 +24,4 @@ const MySelect = ({name, className, disabled, options, defaultValue, value, onCh
     );
 };
 
-export default MySelect;
+export default Select;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../Input/Input';
-import MySelect from '../Select/Select';
+import Select from '../Select/Select';
 import cl from './TaskFilter.module.scss'
 
 const TaskFilter = ({ filter, setFilter }) => {
@@ -9,7 +9,7 @@ const TaskFilter = ({ filter, setFilter }) => {
             <hr className={cl.line}/>
             <div className={cl.sort}>
                 Сортировка задач:
-                <MySelect
+                <Select
                     name='sort'
                     className='sort'
                     value={filter.sort}

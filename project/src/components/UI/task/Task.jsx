@@ -1,7 +1,7 @@
 import React, { useEffect,  useRef, useState } from 'react';
 import Button from '../Button/Button';
-import MyInput from '../Input/Input';
-import MySelect from '../Select/Select';
+import Input from '../Input/Input';
+import Select from '../Select/Select';
 import cl from './Task.module.scss'
 
 const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, setModal}) => {
@@ -34,7 +34,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
             <div className={cl.task__text}>
                 Номер задачи: {num}
                 <div>Название задачи:
-                    <MyInput
+                    <Input
                         placeholder='Введите название'
                         ref={nameTaskRef}
                         className='task__text__item'
@@ -44,7 +44,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
                     />
                 </div>
                 <div>Описание задачи:
-                    <MyInput
+                    <Input
                         placeholder='Введите описание'
                         ref={descriptionTaskRef}
                         className='task__text__item'
@@ -54,7 +54,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
                     />
                 </div>
                 <div>Тег задачи:
-                    <MyInput
+                    <Input
                         placeholder='Введите тег'
                         ref={tagTaskRef}
                         className='task__text__item'
@@ -63,7 +63,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
                         onChange={e => setTaskEdit({ ...taskEdit, tagTask: e.target.value })}
                     />
                     {/* <div>
-                        <MySelect
+                        <Select
                             disabled
                             ref={tagTaskRef}
                             className='task__text__item'
@@ -86,7 +86,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
                 </div>
                 <div>
                     Срок выполнения:
-                    <MyInput
+                    <Input
                         disabled
                         type='date'
                         ref={periodRef}
@@ -104,7 +104,7 @@ const Task = ({/*setTagAndStatus, tagAndStatus,*/ task, num, remove, setTasks, s
             </span>
 
             <div className={cl.task__tools}>
-                <MySelect
+                <Select
                     disabled
                     name='status'
                     value={tagAndStatus.status}
